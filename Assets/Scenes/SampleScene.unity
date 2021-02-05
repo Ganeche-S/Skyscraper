@@ -195,7 +195,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1110483015
-  m_SortingLayer: -1
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 249f81ebd9ddaf544b6cb070c0131c38, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -310,6 +310,51 @@ Tilemap:
   m_GameObject: {fileID: 95263249}
   m_Enabled: 1
   m_Tiles:
+  - first: {x: -3, y: -9, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 0
+      m_TileSpriteIndex: 0
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      m_AllTileFlags: 1073741825
+  - first: {x: -2, y: -9, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 5
+      m_TileSpriteIndex: 5
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      m_AllTileFlags: 1073741825
+  - first: {x: -1, y: -9, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 5
+      m_TileSpriteIndex: 5
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      m_AllTileFlags: 1073741825
+  - first: {x: 0, y: -9, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 5
+      m_TileSpriteIndex: 5
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      m_AllTileFlags: 1073741825
+  - first: {x: 1, y: -9, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 4
+      m_TileSpriteIndex: 4
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      m_AllTileFlags: 1073741825
   - first: {x: -3, y: -8, z: 0}
     second:
       serializedVersion: 2
@@ -501,7 +546,7 @@ Tilemap:
       m_AllTileFlags: 1073741825
   m_AnimatedTiles: {}
   m_TileAssetArray:
-  - m_RefCount: 2
+  - m_RefCount: 3
     m_Data: {fileID: 11400000, guid: ae21bae514840744eb485290f0bf9d8a, type: 2}
   - m_RefCount: 4
     m_Data: {fileID: 11400000, guid: 13f729431aa6ba742b33c39c9a920c8d, type: 2}
@@ -509,9 +554,9 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: fc583af8bf5f6874d80a44eba16dc0af, type: 2}
   - m_RefCount: 2
     m_Data: {fileID: 11400000, guid: 1ba58638ebfdabb47a92f2cc128af277, type: 2}
-  - m_RefCount: 2
+  - m_RefCount: 3
     m_Data: {fileID: 11400000, guid: 7e2c4f351b3ebbd40bbbe40b48ea77bb, type: 2}
-  - m_RefCount: 6
+  - m_RefCount: 9
     m_Data: {fileID: 11400000, guid: c8e7bf99ccdb2fd439fa3ac52d3b1b89, type: 2}
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: 7496b958a35c47c479a4f1df83f86a11, type: 2}
@@ -520,7 +565,7 @@ Tilemap:
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: 5a1228daa41a0d141a353e04273fb11b, type: 2}
   m_TileSpriteArray:
-  - m_RefCount: 2
+  - m_RefCount: 3
     m_Data: {fileID: -1385786070971223102, guid: 3372ab68e9c89c247bb4257d7ac6814c,
       type: 3}
   - m_RefCount: 4
@@ -532,10 +577,10 @@ Tilemap:
   - m_RefCount: 2
     m_Data: {fileID: 7477116942032994148, guid: 3372ab68e9c89c247bb4257d7ac6814c,
       type: 3}
-  - m_RefCount: 2
+  - m_RefCount: 3
     m_Data: {fileID: -6923900727490736670, guid: 3372ab68e9c89c247bb4257d7ac6814c,
       type: 3}
-  - m_RefCount: 6
+  - m_RefCount: 9
     m_Data: {fileID: -538331831730588137, guid: 3372ab68e9c89c247bb4257d7ac6814c,
       type: 3}
   - m_RefCount: 1
@@ -548,7 +593,7 @@ Tilemap:
     m_Data: {fileID: -7131273655155896711, guid: 3372ab68e9c89c247bb4257d7ac6814c,
       type: 3}
   m_TileMatrixArray:
-  - m_RefCount: 21
+  - m_RefCount: 26
     m_Data:
       e00: 1
       e01: 0
@@ -567,7 +612,7 @@ Tilemap:
       e32: 0
       e33: 1
   m_TileColorArray:
-  - m_RefCount: 21
+  - m_RefCount: 26
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
@@ -774,7 +819,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -283384861
-  m_SortingLayer: -3
+  m_SortingLayer: -1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 73f355bc0d001a34ab85d05cf6fa1586, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

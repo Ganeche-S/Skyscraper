@@ -8,7 +8,7 @@ public class SkyBlock : MonoBehaviour
     public static float quickDropTime = 0.05f;
     float timer = 0f;
     bool movable = true;
-    public static int width = 5, height = 4;
+    public static int width = 20, height = 10;
     public Vector3 rotationPoint;
     // Start is called before the first frame update
     void Start()
@@ -64,7 +64,7 @@ public class SkyBlock : MonoBehaviour
             }
             else if(Input.GetKeyDown("e")){
                 transform.RotateAround(transform.TransformPoint(rotationPoint), new Vector3(0,0,1), -90);
-                if(!CheckValid()){
+            if(!CheckValid()){
                     gameObject.transform.position -= new Vector3(1,0,0);
                 }
             }

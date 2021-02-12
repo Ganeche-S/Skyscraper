@@ -8,7 +8,7 @@ public class Block : MonoBehaviour
     private bool collide;   
     private bool dead;
 
-    public int minWidth = 10;
+    public int minWidth = 8;
     public int maxWidth = 26;
     
     // Start is called before the first frame update

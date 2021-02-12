@@ -23,7 +23,7 @@ public class Game : MonoBehaviour
     void Start()
     {    
         position = new Vector3(18, 19, 0);
-        life = 6;
+        life = 5;
         end = false;
 
         SpawnBlock(); // Initiate the first block to start the "loop" 

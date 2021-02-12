@@ -1,76 +1,98 @@
-﻿using System;
-using System.IO;
-
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine; 
-using UnityEngine.SceneManagement;
+using UnityEngine.SceneManagement; 
+using TMPro;
 
 public class Game : MonoBehaviour
 {
     public GameObject[] Blocks; 
-    public GameObject CurrentBlock;     
+    public GameObject CurrentBlock; 
     
+    public Canvas GameOver;
+    public TextMeshProUGUI Life;
+    public TextMeshProUGUI Score;
+    public TextMeshProUGUI FinalScore; 
+
     public Vector3 position;
     public int life;
     public int score;
+    public bool end;
  
     // Start is called before the first frame update
     void Start()
     {    
         position = new Vector3(18, 19, 0);
-        life = 7;
+        life = 6;
+        end = false;
 
         SpawnBlock(); // Initiate the first block to start the "loop" 
     }
 
     public void Update()
     {
+        score = CountPlayerScore();
+        Score.text = "Score : " + score.ToString();
+        Life.text = "Life : " + life.ToString();
+
         Blocks = GameObject.FindGameObjectsWithTag("Block");
 
         // Reset the level 
         if(Input.GetKeyDown("r"))
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-
-
-        if(!EndGame())
+    
+        EndGame();
+        if(!end)
         {  
             if(CurrentBlock == null || CurrentBlock.GetComponent<Block>().IsDead() || CurrentBlock.GetComponent<Block>().HasCollide())
             {
                 if(CurrentBlock.GetComponent<Block>().IsDead())
                 {
                     CurrentBlock.GetComponent<Block>().Harakiri(); 
-                    CurrentBlock = null;
-                    life--;
+                    CurrentBlock = null; 
                 } 
                 SpawnBlock();
             }
         }
         else
         {
-            score = CountPlayerScore(); 
+            FinalScore.text = "Score : " + score.ToString();
+            GameOver.gameObject.SetActive(true);
         } 
     }  
     
     public int CountPlayerScore()
-    {
-        int s = 0;
-        int length = GameObject.FindGameObjectsWithTag("Block").Length;
-        for(int i=0; i<length/10; i++)
+    { 
+        if(!end)
         {
-            if(i == (length/10)-1)
-                s += (i+1)*(length%10);
-            else
-                s += (i+1)*10;
-        }
+            int s = 0;
+            int length = 0;
+            
+            for(int i=0; i<Blocks.Length; i++)
+            { 
+                if(Blocks[i] != null && Blocks[i].GetComponent<Block>() != null && Blocks[i].GetComponent<Block>().HasCollide())
+                    length++;
+            }
 
-        return s;
+            for(int i=0; i<length; i++)
+            { 
+                s += 10*((i/10)+1);
+            }
+
+            return s;
+        }
+        else
+        {
+            return score;
+        } 
     }
 
-    public bool EndGame()
+
+
+    public void EndGame()
     {
         if(life <= 0)
-            return true;
+            end = true;
 
         bool collision = false; 
         
@@ -88,14 +110,13 @@ public class Game : MonoBehaviour
                 else 
                 {
                     collision = Blocks[i].GetComponent<Block>().HasCollide();
-                    if(collision && Blocks[i].transform.position.y>=18) 
+                    if(collision && Blocks[i].transform.position.y>=17) 
                     {
-                        return true;
+                        end = true;
                     }   
                 } 
             }
-        } 
-        return false;
+        }
     }
 
     public void SpawnBlock()

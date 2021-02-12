@@ -7,6 +7,7 @@ TagManager:
   - Block
   - Ground
   - Background
+  - Score
   layers:
   - Default
   - TransparentFX
@@ -16,7 +17,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - Everything
   - 
   - 
   - 
@@ -41,6 +42,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Everything
+    uniqueID: 846978501
+    locked: 0
   - name: Background
     uniqueID: 4011582435
     locked: 0

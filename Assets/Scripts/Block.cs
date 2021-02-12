@@ -6,6 +6,10 @@ public class Block : MonoBehaviour
 {
     private Rigidbody2D rb;   
     private bool collide;   
+    private bool dead;
+
+    public int minWidth = 11;
+    public int maxWidth = 25;
     
     // Start is called before the first frame update
     void Start()
@@ -14,19 +18,20 @@ public class Block : MonoBehaviour
         this.rb.velocity = new Vector2(0, -2.0f);
         
         this.collide = false;  
+        this.dead = false;
     }
 
     // Update is called once per frame
     void Update()
     {            
         if(!collide)
-            CheckUserInput(); 
-
-        if(gameObject != null && gameObject.transform.position.y<3)
         {
-            Destroy(gameObject);
-            Destroy(this.rb);
-            Destroy(this);
+            CheckUserInput(); 
+        }
+
+        if(gameObject.transform.position.y<3)
+        {
+            this.dead = true; 
         }
     } 
 
@@ -43,10 +48,18 @@ public class Block : MonoBehaviour
             if(Input.GetKeyDown("q"))
             {
                 gameObject.transform.position += new Vector3(-1, 0, 0);
+                if(!ValidMove()) 
+                {
+                    gameObject.transform.position -= new Vector3(-1, 0, 0);
+                }
             }
             else if(Input.GetKeyDown("d"))
             {
                 gameObject.transform.position += new Vector3(1, 0, 0);
+                if(!ValidMove()) 
+                {
+                    gameObject.transform.position -= new Vector3(1, 0, 0);
+                }
             }
             else if(Input.GetKeyDown("a"))
             {
@@ -63,7 +76,22 @@ public class Block : MonoBehaviour
     {
         return this.collide;
     }
+
+    public bool IsDead()
+    {
+        return this.dead;
+    }
+
+    public Rigidbody2D getRigidbody()
+    {
+        return this.rb;
+    }
  
+    public void Harakiri()
+    { 
+        Destroy(gameObject);   
+    }
+
     //
     void OnCollisionEnter2D(Collision2D c)
     {
@@ -71,5 +99,20 @@ public class Block : MonoBehaviour
         { 
             collide = true;
         }
+    }
+
+    bool ValidMove() 
+    {
+    	foreach(Transform children in transform) 
+        {
+    		int roundedX = Mathf.RoundToInt(children.transform.position.x);
+    		int roundedY = Mathf.RoundToInt(children.transform.position.y); 
+
+    		if(roundedX <= minWidth || roundedX >= maxWidth) 
+            {
+    			return false; 
+    		}
+    	}
+    	return true;
     }
 }

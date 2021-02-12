@@ -16,7 +16,7 @@ public class WaterLine : MonoBehaviour
     public float velocityDamping = 0.999999f; // Proportional velocity damping, must be less than or equal to 1.
     public float timeScale = 25f;
 
-    public int Width = 30;
+    public int Width = 35;
     public float Height = 10f;
     public Material material;
     public Color color = Color.blue;
@@ -31,8 +31,7 @@ public class WaterLine : MonoBehaviour
     #endif
 
     void Start()
-    {
-        Debug.Log("I am alive!");
+    { 
         #if UNITY_EDITOR
             // Remove what we see from the editor
             Clear();

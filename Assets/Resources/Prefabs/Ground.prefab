@@ -1634,7 +1634,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 4.9874973, y: 4.0213423}
+  m_Size: {x: 4.9225407, y: 4.0213423}
   m_EdgeRadius: 0
 --- !u!114 &1990090941
 MonoBehaviour:
@@ -1650,7 +1650,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Blocks: []
   currentBlock: {fileID: 0}
-  score: 0
 --- !u!1 &8077537756517851455
 GameObject:
   m_ObjectHideFlags: 0

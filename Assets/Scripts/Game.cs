@@ -1,73 +1,111 @@
-﻿using System.Collections;
+﻿using System;
+using System.IO;
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine; 
+using UnityEngine.SceneManagement;
 
 public class Game : MonoBehaviour
 {
     public GameObject[] Blocks; 
-    public GameObject currentBlock;  
-    // public int score;
+    public GameObject CurrentBlock;     
+    
+    public Vector3 position;
+    public int life;
+    public int score;
  
     // Start is called before the first frame update
     void Start()
-    {   
-        // score = 0; 
+    {    
+        position = new Vector3(18, 19, 0);
+        life = 7;
 
         SpawnBlock(); // Initiate the first block to start the "loop" 
     }
 
     public void Update()
     {
+        Blocks = GameObject.FindGameObjectsWithTag("Block");
+
+        // Reset the level 
+        if(Input.GetKeyDown("r"))
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
+
         if(!EndGame())
-        {
-            Blocks = GameObject.FindGameObjectsWithTag("Block");
-            if(currentBlock.GetComponent<Block>().HasCollide())
+        {  
+            if(CurrentBlock == null || CurrentBlock.GetComponent<Block>().IsDead() || CurrentBlock.GetComponent<Block>().HasCollide())
             {
+                if(CurrentBlock.GetComponent<Block>().IsDead())
+                {
+                    CurrentBlock.GetComponent<Block>().Harakiri(); 
+                    CurrentBlock = null;
+                    life--;
+                } 
                 SpawnBlock();
             }
         }
-        // score = CountPlayerScore(); 
+        else
+        {
+            score = CountPlayerScore(); 
+        } 
     }  
     
-    // public int CountPlayerScore()
-    // {
-    //     int s = 0;
-    //     int length = GameObject.FindGameObjectsWithTag("Block").Length;
-    //     for(int i=0; i<length/10; i++)
-    //     {
-    //         if(i == (length/10)-1)
-    //             s += (i+1)*(length%10);
-    //         else
-    //             s += (i+1)*10;
-    //     }
+    public int CountPlayerScore()
+    {
+        int s = 0;
+        int length = GameObject.FindGameObjectsWithTag("Block").Length;
+        for(int i=0; i<length/10; i++)
+        {
+            if(i == (length/10)-1)
+                s += (i+1)*(length%10);
+            else
+                s += (i+1)*10;
+        }
 
-    //     return s;
-    // }
+        return s;
+    }
 
     public bool EndGame()
     {
-        bool collision = false;
-        foreach(GameObject go in Blocks)
-        {
-            collision = go.GetComponent<Block>().HasCollide();
-            if(collision && go.transform.position.y>=18) 
+        if(life <= 0)
+            return true;
+
+        bool collision = false; 
+        
+        Blocks = GameObject.FindGameObjectsWithTag("Block");
+        for(int i=0; i<Blocks.Length; i++)
+        { 
+            if(Blocks[i] != null && Blocks[i].GetComponent<Block>() != null)
             {
-                return true;
+                if(Blocks[i].GetComponent<Block>().IsDead())
+                {
+                    Blocks[i].GetComponent<Block>().Harakiri(); 
+                    Blocks[i] = null;
+                    life--;
+                } 
+                else 
+                {
+                    collision = Blocks[i].GetComponent<Block>().HasCollide();
+                    if(collision && Blocks[i].transform.position.y>=18) 
+                    {
+                        return true;
+                    }   
+                } 
             }
-        }
+        } 
         return false;
     }
 
     public void SpawnBlock()
     {
-        Vector3 position = new Vector3(18, 19, 0);
-        currentBlock = (GameObject) Instantiate(Resources.Load<GameObject>(GetRandomBlock()), position, Quaternion.identity);
-    
+        CurrentBlock = Instantiate(Resources.Load<GameObject>(GetRandomBlock()), position, Quaternion.identity) as GameObject; 
     }
 
     public string GetRandomBlock()
     {
-        int random = Random.Range(1,8);
+        int random = UnityEngine.Random.Range(1,8);
 
         string randomBlock = "Prefabs/";
 
@@ -94,10 +132,9 @@ public class Game : MonoBehaviour
             case 7:
                 randomBlock += "Block_T";
                 break;
-        }
-        Debug.Log(randomBlock);
+        } 
 
         return randomBlock;
     }
-     
+ 
 }
